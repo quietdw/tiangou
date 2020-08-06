@@ -6,20 +6,25 @@
   width: 100%;
   header {
     width: 100%;
-    padding: 10px;
+    box-sizing: border-box;
+    padding: 10px 15px;
     text-align: left;
     font-size: 20px;
     background: #fff;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     img {
       width: 36px;
       height: 36px;
       margin-left: 10px;
     }
-    h2 {
-      margin-left: 10px;
+    .iconfont {
+      margin: 5px 8px;
     }
+    // h2 {
+    //   margin-left: 10px;
+    // }
   }
   .shit {
     margin: auto 30px;
