@@ -46,8 +46,10 @@ export default function Tiangou() {
       {loading ? (
         <LoadingIcon></LoadingIcon>
       ) : (
-        <article className={`shit border-${borderN}`}>
-          <pre>{idol.shit}</pre>
+        <article  className={`shit border-${borderN}`}>
+          <pre>
+            {idol.shit}
+          </pre>
         </article>
       )}
       <button
