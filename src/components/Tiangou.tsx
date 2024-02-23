@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import './tiangou.scss'
+import './tiangou.less'
 import LoadingIcon from './Loading'
 import lickGif from '../static/lick.gif'
 
 export default function Tiangou() {
-  const [idol, setIdol] = useState([{ shit: '', weather: '' }])
+  const [idol, setIdol] = useState({shit:''})
   const [borderN, setBorderN] = useState(0)
   const [loading, setLoading] = useState(true)
 
@@ -17,20 +17,17 @@ export default function Tiangou() {
 
   async function getTiangou() {
     setLoading(true)
-    const result = await Promise.all([getShit(), getWeather()])
+    const result = await getShit()
     setBorderN(Math.ceil(Math.random() * 4))
-    setIdol([{ shit: result[0], weather: result[1] }])
+    setIdol({ shit: result })
     setLoading(false)
   }
   async function getShit() {
-    const result = await axios.get('https://v1.alapi.cn/api/dog')
-    return result.data.data.content
+    const result = await axios.get('https://cloud.qqshabi.cn/api/tiangou/api.php')
+    console.log(result);
+    return result.data
   }
-  async function getWeather() {
-    const result = await axios.get('https://v1.alapi.cn/api/tianqi/now')
-    const { city, wea, tem } = result.data.data
-    return `${city}·${wea}·${tem}`
-  }
+
 
   return (
     <div className="tiangou">
@@ -50,9 +47,7 @@ export default function Tiangou() {
         <LoadingIcon></LoadingIcon>
       ) : (
         <article className={`shit border-${borderN}`}>
-          <p>{idol[0].weather}</p>
-          <br />
-          <p>{idol[0].shit}</p>
+          <pre>{idol.shit}</pre>
         </article>
       )}
       <button
