@@ -5,7 +5,7 @@ import LoadingIcon from './Loading'
 import lickGif from '../static/lick.gif'
 
 export default function Tiangou() {
-  const [idol, setIdol] = useState({shit:''})
+  const [idol, setIdol] = useState({shit:'', weather: ''})
   const [borderN, setBorderN] = useState(0)
   const [loading, setLoading] = useState(true)
 
@@ -19,11 +19,17 @@ export default function Tiangou() {
     setLoading(true)
     const result = await getShit()
     setBorderN(Math.ceil(Math.random() * 4))
-    setIdol({ shit: result })
+    setIdol({ shit: result,weather: '' })
+    // const result1 = await getWeather()
     setLoading(false)
   }
   async function getShit() {
-    const result = await axios.get('https://cloud.qqshabi.cn/api/tiangou/api.php')
+    const result = await axios.get('https://v.api.aa1.cn/api/tiangou/')
+    return result.data
+  }
+
+  async function getWeather() {
+    const result = await axios.get('https://www.apii.cn/api/weather/')
     console.log(result);
     return result.data
   }
@@ -48,7 +54,8 @@ export default function Tiangou() {
       ) : (
         <article  className={`shit border-${borderN}`}>
           <pre>
-            {idol.shit}
+          
+            <div  dangerouslySetInnerHTML={{__html:idol.shit}}></div>
           </pre>
         </article>
       )}
